@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Terminal Jumpscare</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: #00ff00;
+      font-family: monospace;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+    }
+    #scare {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: flash 0.1s infinite;
+      z-index: 1;
+    }
+    #scare img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @keyframes flash {
+      0% { background-color: black; }
+      50% { background-color: white; }
+      100% { background-color: black; }
+    }
+  </style>
+</head>
+<body onload="startScare()">
+  <div id="scare">
+    <img src="https://i.postimg.cc/L61wqGyQ/dadadwed.gif" alt="Jumpscare GIF" />
+    <audio id="scream" autoplay>
+      <source src="https://www.soundjay.com/human/sounds/scream-01.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <script>
+    function startScare() {
+      const scream = document.getElementById("scream");
+      scream.play().catch(() => {
+        document.body.addEventListener("click", () => {
+          scream.play();
+        }, { once: true });
+      });
+    }
+  </script>
+</body>
+</html>
