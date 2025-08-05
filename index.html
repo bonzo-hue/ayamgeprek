@@ -1,52 +1,68 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Jumpscare</title>
+  <meta charset="UTF-8">
+  <title>Jumpscare Start</title>
   <style>
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
       background-color: black;
+      font-family: Arial, sans-serif;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
     }
-    #btn {
+    #start-button {
+      padding: 20px 40px;
       font-size: 24px;
-      padding: 20px;
       background-color: red;
       color: white;
       border: none;
       border-radius: 10px;
       cursor: pointer;
+      z-index: 2;
     }
     #scare {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: black;
       display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+    }
+    #scare img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      position: absolute;
-      top: 0;
-      left: 0;
     }
   </style>
 </head>
 <body>
-  <button id="btn">Klik kalau berani</button>
-  <img id="scare" src="https://i.postimg.cc/L61wqGyQ/dadadwed.gif" />
-  <audio id="sfx" src="tortured-scream.mp3"></audio>
+  <button id="start-button" onclick="startScare()">Klik untuk Mulai</button>
+
+  <div id="scare">
+    <img src="https://i.postimg.cc/L61wqGyQ/dadadwed.gif" alt="Jumpscare GIF" />
+    <audio id="scream" autoplay>
+      <source src="https://www.soundjay.com/human/sounds/scream-01.mp3" type="audio/mpeg">
+    </audio>
+  </div>
 
   <script>
-    const btn = document.getElementById("btn");
-    const scare = document.getElementById("scare");
-    const sfx = document.getElementById("sfx");
-
-    btn.addEventListener("click", () => {
-      scare.style.display = "block";
-      sfx.play();
-      btn.style.display = "none";
-    });
+    function startScare() {
+      document.getElementById('start-button').style.display = 'none';
+      document.getElementById('scare').style.display = 'flex';
+      const scream = document.getElementById("scream");
+      scream.play();
+    }
   </script>
 </body>
 </html>
