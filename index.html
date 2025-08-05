@@ -3,17 +3,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Terminal Jumpscare</title>
+  <title>Jumpscare Start</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       background-color: black;
-      color: #00ff00;
-      font-family: monospace;
+      font-family: Arial, sans-serif;
       height: 100%;
       width: 100%;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    #start-button {
+      padding: 20px 40px;
+      font-size: 24px;
+      background-color: red;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      z-index: 2;
     }
     #scare {
       position: fixed;
@@ -22,10 +34,9 @@
       width: 100%;
       height: 100%;
       background: black;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
-      animation: flash 0.1s infinite;
       z-index: 1;
     }
     #scare img {
@@ -33,14 +44,11 @@
       height: 100%;
       object-fit: cover;
     }
-    @keyframes flash {
-      0% { background-color: black; }
-      50% { background-color: white; }
-      100% { background-color: black; }
-    }
   </style>
 </head>
-<body onload="startScare()">
+<body>
+  <button id="start-button" onclick="startScare()">Klik untuk Mulai</button>
+
   <div id="scare">
     <img src="https://i.postimg.cc/L61wqGyQ/dadadwed.gif" alt="Jumpscare GIF" />
     <audio id="scream" autoplay>
@@ -50,12 +58,10 @@
 
   <script>
     function startScare() {
+      document.getElementById('start-button').style.display = 'none';
+      document.getElementById('scare').style.display = 'flex';
       const scream = document.getElementById("scream");
-      scream.play().catch(() => {
-        document.body.addEventListener("click", () => {
-          scream.play();
-        }, { once: true });
-      });
+      scream.play();
     }
   </script>
 </body>
